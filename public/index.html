@@ -14,24 +14,53 @@
   		margin-top: 20px;
   		margin-left: 15px;
   	}
+  	h1 { text-align: center }
+  	#sendBtn {
+  		margin-top: 3px;
+  	}
   </style>
 </head>
 <body>
+	<h1 align="center">Chat Application</h1>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<form action="">
 					<dif class="form-group">
+						<label for="msgbox">Conversation</label>
+						<textarea name="" id="msgbox" rows="30" class="form-control"></textarea>
+					</dif>
+				</form>
+			
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form action="">
+					<dif class="form-group">
+						<br>
 						<label for="msgbox">Type message below:</label>
 						<textarea name="" id="msgbox"  class="form-control"></textarea>
 					</dif>
-					<button type="submit" class="btn btn-primary">Send</button>
+					<button id="sendBtn" type="submit" class="btn btn-primary">Send</button>
 				</form>
 			
 			</div>
 		</div>
 		
 	</div>
-	
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		
+		var socket = io();
+
+		socket.on('connect',() => {
+			console.log('Connected to server');
+		});
+
+		socket.on('disconnect',() => {
+			console.log('disconnected to server');
+		});
+	</script>
 </body>
 </html>

@@ -18,20 +18,20 @@
   	#sendBtn {
   		margin-top: 3px;
   	}
+  	#Conversation {
+    	height: 20vw;
+    	border: 2px solid grey;
+	}
+/*	#Conversation h1 {
+	    color: #fff;
+	}*/
   </style>
 </head>
 <body>
 	<h1 align="center">Chat Application</h1>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<form  action="#">
-					<div class="form-group">
-						<label for="msgbox">Conversation</label>
-						<textarea name="" id="Conversation" rows="30" class="form-control"></textarea>
-					</div>
-				</form>
-			
+			<div id="Conversation" class="col-md-8 col-md-offset-2">
 			</div>
 		</div>
 		<div class="row">
@@ -68,6 +68,7 @@
 		    socket.on('chat',function(msg) {
 		    	console.log("client" + msg.message);
 		    	$('#Conversation').append('<p><strong>'+msg.user+'</strong> :' + msg.message+'</p>');
+		    	// document.getElementById('Conversation').innerHtml = '<p><strong>'+msg.user+'</strong> :' + msg.message+'</p>'
 		    });
 
 

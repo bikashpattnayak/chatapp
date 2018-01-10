@@ -15,9 +15,10 @@ var io = socketIo(server);
 io.on('connection', (socket) => {
 	console.log('New Connection received');
 
-	socket.on('disconnect', () => {
-		console.log('Client disconnected');
-	})
+	socket.on('chat', (msg) => {
+		io.emit('chat',msg);
+		console.log(msg);
+	});
 
 })
 

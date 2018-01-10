@@ -25,23 +25,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<form action="">
-					<dif class="form-group">
+				<form  action="#">
+					<div class="form-group">
 						<label for="msgbox">Conversation</label>
-						<textarea name="" id="msgbox" rows="30" class="form-control"></textarea>
-					</dif>
+						<textarea name="" id="Conversation" rows="30" class="form-control"></textarea>
+					</div>
 				</form>
 			
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<form action="">
-					<dif class="form-group">
-						<br>
+				<form id='frm' action="#">
+					<div class="form-group">
+						<label for="user">User:</label>
+						<input type="text" class="form-control" id="user">
 						<label for="msgbox">Type message below:</label>
 						<textarea name="" id="msgbox"  class="form-control"></textarea>
-					</dif>
+					</div>
 					<button id="sendBtn" type="submit" class="btn btn-primary">Send</button>
 				</form>
 			
@@ -51,16 +52,29 @@
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
+		$(function (){
+		    var socket = io();
+		    $('#frm').submit(function(){
+		    	var content = $('#msgbox').val();
+		    	var user = $('#user').val();
+		    	socket.emit('chat',{
+		    		user: user,
+		    		message: content
+		    	});
+		    	$('#msgbox').val('');
+		    	return false;
+		    });
+
+		    socket.on('chat',function(msg) {
+		    	console.log("client" + msg.message);
+		    	$('#Conversation').append('<p><strong>'+msg.user+'</strong> :' + msg.message+'</p>');
+		    });
+
+
+		});
 		
-		var socket = io();
 
-		socket.on('connect',() => {
-			console.log('Connected to server');
-		});
-
-		socket.on('disconnect',() => {
-			console.log('disconnected to server');
-		});
+		
 	</script>
 </body>
 </html>
